@@ -4,7 +4,7 @@
 #include <stdint.h>
 #include <stdbool.h>
 
-#define BUILD_BUG_ON_ZERO(e) ((int)(sizeof(struct { int : (-!!(e)); })))
+#define BUILD_BUG_ON_ZERO(e) ((int)(sizeof(struct{ int : (-!!(e)); })))
 
 // Mask (from x for n bits)
 #define MASK32(x, n) (((uint32_t)(n) >= sizeof(uint32_t) * CHAR_BIT) ? (uint32_t)-1 : ((1UL << (n)) - 1) << (x))
@@ -59,12 +59,12 @@
   } while (0)
 
 #define REG32_FIELD_GET_BITS(reg, x, n, type) ((type)REG32_GET((reg), MASK32((x), (n))) >> (x))
-#define REG32_FIELD_SET_BITS(reg, x, n, val)                                             \
-  do {                                                                                   \
+#define REG32_FIELD_SET_BITS(reg, x, n, val)                                                     \
+  do {                                                                                           \
     REG32(reg) = (uint32_t)(REG32(reg) & (~MASK32((x), (n))) | (((val) & MASK(0, (n))) << (x))); \
   } while (0)
-#define REG32_FIELD_GET_BYTE(reg, byte, type) REG32_FIELD_GET_BITS(reg, MASK32((byte) * CHAR_BIT, CHAR_BIT, type)
-#define REG32_FIELD_SET_BYTE(reg, byte, val)  REG32_FIELD_SET_BITS(reg, MASK32((byte) * CHAR_BIT, CHAR_BIT, val)
+#define REG32_FIELD_GET_BYTE(reg, byte, type) REG32_FIELD_GET_BITS(reg, MASK32((byte) * CHAR_BIT, CHAR_BIT, type))
+#define REG32_FIELD_SET_BYTE(reg, byte, val)  REG32_FIELD_SET_BITS(reg, MASK32((byte) * CHAR_BIT, CHAR_BIT, val))
 #define REG32_FIELD_GET(reg, mask, type) ((type)REG32_GET((reg), (mask)) >> BIT32_FFS(mask))
 #define REG32_FIELD_SET(reg, mask, val)  REG32_FIELD_SET_BITS((reg), BIT32_FFS(mask), BIT32_COUNT(mask), (val))
 
