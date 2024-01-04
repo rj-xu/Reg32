@@ -128,8 +128,8 @@
 // Big/Little Endian
 /////////////////////////////////////////////////
 
-#define BE_TO_LE(x)                                     \
-  ((0x000000FF & (x) << 24) | (0x0000FF00 & (x) << 8) | \
-   (0x00FF0000 & (x) >> 8) | (0xFF000000 & (x) >> 24))
+#define BE_TO_LE(num)                                       \
+  ((0x000000FF & (num) << 24) | (0x0000FF00 & (num) << 8) | \
+   (0x00FF0000 & (num) >> 8) | (0xFF000000 & (num) >> 24))
 
-#define LE_TO_BE(x) BE_TO_LE(x)
+#define LE_TO_BE(num) BE_TO_LE(num)
