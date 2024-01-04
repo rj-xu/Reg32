@@ -116,7 +116,7 @@
 
 #define REG_GET_BITS(reg, x, n) \
   (REG_GET((reg), MASK((x), (n))) >> (x))
-#define REG_SET_BITS(reg, x, n, val)                 \
+#define REG_SET_BITS(reg, val, x, n)                 \
   do                                                 \
   {                                                  \
     REG(reg) =                                       \
