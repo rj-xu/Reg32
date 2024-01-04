@@ -62,7 +62,7 @@
 //   })
 
 #define MASK_BYTE(byte) MASK((byte) * 8, 8)
-#define BYTE32(byte, mask) ((mask) << ((byte) * 8))
+#define BYTE(byte, mask) ((mask) << ((byte) * 8))
 
 /////////////////////////////////////////////////
 // Reg
