@@ -106,12 +106,12 @@
     REG(reg) ^= (mask);       \
   } while (0)
 
-#define REG_TRIGGER(reg, mask)   \
-  do                             \
-  {                              \
-    uint32_t _v = REG_READ(reg); \
-    REG(reg) = _v | (mask);      \
-    REG(reg) = _v & (~(mask));   \
+#define REG_TRIGGER(reg, mask)     \
+  do                               \
+  {                                \
+    uint32_t _val = REG_READ(reg); \
+    REG(reg) = _val | (mask);      \
+    REG(reg) = _val & (~(mask));   \
   } while (0)
 
 #define REG_GET_BITS(reg, x, n) \
@@ -128,7 +128,7 @@
 // Big/Little Endian
 /////////////////////////////////////////////////
 
-#define BE_TO_LE(x)                                   \
+#define BE_TO_LE(x)                                     \
   ((0x000000FF & (x) << 24) | (0x0000FF00 & (x) << 8) | \
    (0x00FF0000 & (x) >> 8) | (0xFF000000 & (x) >> 24))
 
