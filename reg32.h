@@ -29,7 +29,8 @@
 /////////////////////////////////////////////////
 
 #define BIT(bit) (1UL << (bit))
-// Find the first set bit (31-0)
+
+// Find the first set bit (31-0), if 0 return -1
 #define BIT_FFS(mask) (__builtin_ffs(mask) - 1)
 // Find the last set bit (31-0)
 #define BIT_FLS(mask) (31 - __builtin_clz(mask))
@@ -114,14 +115,14 @@
     REG(reg) = _val & (~(mask));   \
   } while (0)
 
+#define BITS(val, x, n) ((val) & MASK(0, (n)) << (x))
 #define REG_GET_BITS(reg, x, n) \
   (REG_GET((reg), MASK((x), (n))) >> (x))
-#define REG_SET_BITS(reg, val, x, n)                 \
-  do                                                 \
-  {                                                  \
-    REG(reg) =                                       \
-        (uint32_t)(REG(reg) & (~MASK((x), (n))) |    \
-                   (((val) & MASK(0, (n))) << (x))); \
+#define REG_SET_BITS(reg, val, x, n)            \
+  do                                            \
+  {                                             \
+    REG(reg) = (REG(reg) & (~MASK((x), (n)))) | \
+               BITS(val, x, n);                 \
   } while (0)
 
 /////////////////////////////////////////////////
